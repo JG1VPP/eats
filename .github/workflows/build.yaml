@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+    - 'master'
+permissions:
+  contents: write
+  id-token: write
+  pages: write
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    steps:
+    - id: build-publish
+      uses: bitovi/github-actions-react-to-ghp@v1.2.0
+      with:
+        path: build
